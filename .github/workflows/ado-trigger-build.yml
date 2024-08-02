@@ -18,10 +18,16 @@ jobs:
           ADO_PAT: ${{ secrets.ADO_PAT }}
         run: |
           # Set variables
-          ADO_ORG="your_organization"
-          ADO_PROJECT="your_project"
+          ADO_ORG="UnipharGroup"
+          ADO_PROJECT="DAWN-dev"
           ADO_PIPELINE_ID="your_pipeline_id"
-          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/pipelines/${ADO_PIPELINE_ID}/run?api-version=6.0"
+          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
 
           # Trigger pipeline
-          curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" ${ADO_URL}
+          # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" ${ADO_URL}
+
+          curl -X PATCH \
+          -H "Authorization: Basic $(echo -n ":ADO_PAT" | base64)" \
+          -H "Content-Type: application/json-patch+json" \
+          -d '[{"op": "add", "path": "/fields/System.History", "value": "Updated comment: This is a new comment."}]' \
+          ADO_URL
