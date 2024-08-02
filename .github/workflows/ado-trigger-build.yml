@@ -24,8 +24,10 @@ jobs:
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
           echo $ADO_PAT
           echo $ADO_URL
+          $credPair = "$($username):$($patToken)"
+          $encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
           # Trigger pipeline
-          # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" ${ADO_URL}
+          # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${credPair}" | base64)" ${ADO_URL}
 
           curl -X PATCH \
           -H "Authorization: Basic $(echo -n ":ADO_PAT" | base64)" \
