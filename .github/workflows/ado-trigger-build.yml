@@ -29,5 +29,5 @@ jobs:
           curl -X PATCH \
           -H "Authorization: Basic $(echo -n ":ADO_PAT" | base64)" \
           -H "Content-Type: application/json-patch+json" \
-          -d '[{"op": "add", "path": "/fields/System.History", "value": "Updated comment: This is a new comment."}]' \
+          -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
           ADO_URL
