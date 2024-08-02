@@ -30,4 +30,4 @@ jobs:
           -H "Authorization: Basic $(echo -n ":ADO_PAT" | base64)" \
           -H "Content-Type: application/json-patch+json" \
           -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
-          ADO_URL
+          ${ADO_URL}
