@@ -16,6 +16,7 @@ jobs:
       - name: Trigger Azure DevOps Pipeline
         env:
           ADO_PAT: ${{ secrets.ADO_PAT }}
+          username: ${{ secrets.USERNAME }}
         run: |
           # Set variables
           ADO_ORG="UnipharGroup"
@@ -24,13 +25,21 @@ jobs:
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
           echo $ADO_PAT
           echo $ADO_URL
-          $credPair = "$($username):$($patToken)"
+          credpair = "$($username):$($ADO_PAT)"
+          echo $credpair
+
+          curl -X PATCH \
+          -H "Authorization: Basic $(echo -n ":credpair" | base64)" \
+          -H "Content-Type: application/json-patch+json" \
+          -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
+          ${ADO_URL}
+          
           $encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
           # Trigger pipeline
           # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${credPair}" | base64)" ${ADO_URL}
 
           curl -X PATCH \
-          -H "Authorization: Basic $(echo -n ":ADO_PAT" | base64)" \
+          -H "Authorization: Basic $(echo -n ":encodedCredentials" | base64)" \
           -H "Content-Type: application/json-patch+json" \
           -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
           ${ADO_URL}
