@@ -22,7 +22,7 @@ jobs:
           ADO_PROJECT="DAWN-dev"
           ADO_PIPELINE_ID="your_pipeline_id"
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
-
+          echo ${ADO_PAT}
           # Trigger pipeline
           # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" ${ADO_URL}
 
