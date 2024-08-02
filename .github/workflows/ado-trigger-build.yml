@@ -25,7 +25,7 @@ jobs:
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
           echo $ADO_PAT
           echo $ADO_URL
-          credpair = "$($username):$($ADO_PAT)"
+          $credpair = "${username}:${ADO_PAT}"
           echo $credpair
 
           curl -X PATCH \
