@@ -1,0 +1,27 @@
+name: Trigger ADO Build Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Trigger Azure DevOps Pipeline
+        env:
+          ADO_PAT: ${{ secrets.ADO_PAT }}
+        run: |
+          # Set variables
+          ADO_ORG="your_organization"
+          ADO_PROJECT="your_project"
+          ADO_PIPELINE_ID="your_pipeline_id"
+          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/pipelines/${ADO_PIPELINE_ID}/run?api-version=6.0"
+
+          # Trigger pipeline
+          curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" ${ADO_URL}
