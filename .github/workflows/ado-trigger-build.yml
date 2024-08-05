@@ -16,29 +16,13 @@ jobs:
       - name: Trigger Azure DevOps Pipeline
         env:
           ADO_PAT: ${{ secrets.ADO_PAT }}
-          username: ${{ secrets.USERNAME }}
+          ADO_ORG: "UnipharGroup"
+          ADO_PROJECT: "DAWN-dev"          
         run: |
           # Set variables
-          ADO_ORG="UnipharGroup"
-          ADO_PROJECT="DAWN-dev"
-          ADO_PIPELINE_ID="your_pipeline_id"
-          #ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
-          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"
-  
-          
-          pat="${{ secrets.ADO_PAT }}"
-          echo "pat value : $pat"
-          username="${{ secrets.USERNAME }}"
-          echo "usernamw is : $username"
-          credpair="${username}:${pat}"          
-                       
-          echo " url is : $ADO_URL"          
-
-          #tokenHeaders=@{ "Content-Type" = "application/x-www-form-urlencoded" "Authorization" = "Basic $pat" }
-          #echo "token : $tokenHeaders"
-          #tokenResponse=Invoke-RestMethod -Uri $ADO_URL -Method Patch -Body "grant_type=client_credentials" -Headers $tokenHeaders
-          #Write-Output "Token: $(tokenResponse.access_token)"
-          #echo "tokenResponse is $tokenResponse "
-          commentBody="{ "text" = "Code Updated" }"
-          commentResponse = Invoke-RestMethod -Uri $ADO_URL -Method 'POST' -Headers @{Authorization=("Basic {0}" -f [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$pat")))} -Body (ConvertTo-Json $commentBody) -ContentType "application/json"
-          #echo "tokenResponse is $commentResponse "
+          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
+          # Trigger the pipeline
+          curl -X POST "$ADO_URL" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" \
+            -d '{ "text" = "Code Updated"  }'
