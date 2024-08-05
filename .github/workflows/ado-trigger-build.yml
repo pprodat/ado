@@ -27,7 +27,8 @@ jobs:
           pat="${{ secrets.ADO_PAT }}"
           echo "pat value : $pat"
           username="${{ secrets.USERNAME }}"
-          credPair="$($username):$($pat)"
+          echo "usernamw is : $username"
+          credPair="$(username):$(pat)"
           echo "credentails pair : $credpair"
 
 
