@@ -24,7 +24,8 @@ jobs:
           # Trigger the pipeline
           # JSON data to be sent
           json_data='{"text": "Code Updated hehhe"}'
-          
+          encoded_pat=$(echo -n ":${ADO_PAT}" | base64)
+          echo " pat : $encoded_pat"
           # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
