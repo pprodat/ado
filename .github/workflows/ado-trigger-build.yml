@@ -27,7 +27,7 @@ jobs:
           # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Basic OjN3bXI0aHFxamNiY3AybjJ6dXM3ZWpxZ3Rrc2FoZmFpc2FqcHF1bzR1eGtvMnN2N2Z0cXE=" \
+            -H "Authorization: Basic Onl2bzU0ZGlmdXFnZGNveXRjb2JuN21jcXd3aHRwZmY3enc0cmpyemFtbHNxdGtmemFzdXE=" \
             -d "$json_data" \
             -w "%{http_code}" -o response_body.txt -s)
                     
