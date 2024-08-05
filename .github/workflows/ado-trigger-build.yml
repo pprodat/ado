@@ -15,7 +15,6 @@ jobs:
 
       - name: Trigger Azure DevOps Pipeline
         env:
-          ADO_PAT: "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"
           ADO_ORG: "UnipharGroup"
           ADO_PROJECT: "DAWN-dev"          
         run: |
@@ -28,7 +27,7 @@ jobs:
           # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
-            -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" \
+            -H "Authorization: Basic 3wmr4hqqjcbcp2n2zus7ejqgtksahfaisajpquo4uxko2sv7ftqq" \
             -d "$json_data" \
             -w "%{http_code}" -o response_body.txt -s)
                     
