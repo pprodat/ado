@@ -24,21 +24,21 @@ jobs:
           ADO_PIPELINE_ID="your_pipeline_id"
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
 
-          pat = "${{ secrets.ADO_PAT }}"
+          pat="${{ secrets.ADO_PAT }}"
           echo "pat value : $pat"
-          username = "${{ secrets.USERNAME }}"
-          credPair = "$($username):$($pat)"
+          username="${{ secrets.USERNAME }}"
+          credPair="$($username):$($pat)"
           echo "credentails pair : $credpair"
 
 
-          apiUrl = "https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
-          encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))
+          apiUrl="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
+          encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))
           $headers= @{'Content-Type' = "application/json-patch+json"
                         'Accept' = "application/json; api-version=7.0"
                         'Authorization' = "Basic $encodedCredentials"
                        }
-          response = Invoke-RestMethod $apiUrl -Method GET -Headers $headers
-          response1 = $response | ConvertTo-Json
+          response=Invoke-RestMethod $apiUrl -Method GET -Headers $headers
+          response1=$response | ConvertTo-Json
           echo "response : $response"
 
           curl -X PATCH \
