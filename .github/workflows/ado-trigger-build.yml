@@ -47,7 +47,7 @@ jobs:
           #echo "response : $response"
 
           response=$(curl -s -X PATCH \
-          -H "Authorization: Basic $(echo -n ":credpair" | base64)" \
+          -H "Authorization: Basic $(echo -n "3wmr4hqqjcbcp2n2zus7ejqgtksahfaisajpquo4uxko2sv7ftqq" )" \
           -H "Content-Type: application/json-patch+json" \
           -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
           ${ADO_URL} )
