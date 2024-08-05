@@ -35,12 +35,10 @@ jobs:
           echo " url is : $ADO_URL"          
 
           #tokenHeaders=@{ "Content-Type" = "application/x-www-form-urlencoded" "Authorization" = "Basic $pat" }
-          echo "token : $tokenHeaders"
+          #echo "token : $tokenHeaders"
           #tokenResponse=Invoke-RestMethod -Uri $ADO_URL -Method Patch -Body "grant_type=client_credentials" -Headers $tokenHeaders
           #Write-Output "Token: $(tokenResponse.access_token)"
           #echo "tokenResponse is $tokenResponse "
-          commentBody=@{
-            "text" = "Code Updated"
-          }
+          commentBody="{ "text" = "Code Updated" }"
           commentResponse = Invoke-RestMethod -Uri $ADO_URL -Method 'POST' -Headers @{Authorization=("Basic {0}" -f [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$pat")))} -Body (ConvertTo-Json $commentBody) -ContentType "application/json"
           #echo "tokenResponse is $commentResponse "
