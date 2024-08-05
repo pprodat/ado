@@ -35,22 +35,24 @@ jobs:
           apiUrl="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
           echo "url is : $apiUrl"
           #encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credpair))
-          encodedCredentials=$(echo -n "$credPair" | base64)
+          encodedCredentials=$(echo -n "$credpair" | base64)
           #echo "encodedCredentials : $encodedCredentials"
-          headers= @{'Content-Type' = "application/json-patch+json"
-                        'Accept' = "application/json; api-version=7.0"
-                        'Authorization' = "Basic $encodedCredentials"
-                       }
+          #headers= @{'Content-Type' = "application/json-patch+json"
+          #              'Accept' = "application/json; api-version=7.0"
+          #              'Authorization' = "Basic $encodedCredentials"
+          #             }
                        
-          response=Invoke-RestMethod $apiUrl -Method GET -Headers $headers
-          response1=$response | ConvertTo-Json
-          echo "response : $response"
+          #response=Invoke-RestMethod $apiUrl -Method GET -Headers $headers
+          #response1=$response | ConvertTo-Json
+          #echo "response : $response"
 
-          curl -X PATCH \
+          response=$(curl -s -X PATCH \
           -H "Authorization: Basic $(echo -n ":credpair" | base64)" \
           -H "Content-Type: application/json-patch+json" \
           -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
-          ${ADO_URL}
+          ${ADO_URL} )
+
+          echo "response is $response"
           
           $encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
           # Trigger pipeline
