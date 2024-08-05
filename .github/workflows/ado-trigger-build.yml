@@ -24,9 +24,15 @@ jobs:
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
           # Trigger the pipeline
           # JSON data to be sent
-          json_data='{"text": "Code Updated hehhe"}'
+          json_data='{"text": "Code Updated hehhe1"}'
           encoded_pat=$(echo -n ":${PAT}" | base64)
           echo " pat : $encoded_pat"
+          encoded_pat1=$(echo -n ":${ADO_PAT}" | base64)
+          echo " secret pat : $encoded_pat1"          
+
+          encoded_pat2=$(echo -n ":${encoded_pat}" | base64)
+          echo " encode ka encode : $encoded_pat2"          
+
           # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
