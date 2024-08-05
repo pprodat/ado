@@ -33,10 +33,11 @@ jobs:
 
 
           apiUrl="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
-          #encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes${credpair})
+          encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credpair))
+          echo "encodedCredentials : $encodedCredentials"
           headers= @{'Content-Type' = "application/json-patch+json"
                         'Accept' = "application/json; api-version=7.0"
-                        'Authorization' = "Basic $credpair"
+                        'Authorization' = "Basic $encodedCredentials"
                        }
           response=Invoke-RestMethod $apiUrl -Method GET -Headers $headers
           response1=$response | ConvertTo-Json
