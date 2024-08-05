@@ -35,17 +35,15 @@ jobs:
           Write-Output "##vso[task.setvariable variable=mycredPair;]$credPair"
 
 
-            $apiUrl = "https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
-            $encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))
-            $headers= @{'Content-Type' = "application/json-patch+json"
+          $apiUrl = "https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
+          $encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))
+          $headers= @{'Content-Type' = "application/json-patch+json"
                         'Accept' = "application/json; api-version=7.0"
                         'Authorization' = "Basic $encodedCredentials"
                        }
-            $response = Invoke-RestMethod $apiUrl -Method GET -Headers $headers
-            $response1 = $response | ConvertTo-Json
-
-        shell: pwsh
-
+          $response = Invoke-RestMethod $apiUrl -Method GET -Headers $headers
+          $response1 = $response | ConvertTo-Json
+          Write-Output "##vso[task.setvariable variable=myresponse;]$response"
 
           curl -X PATCH \
           -H "Authorization: Basic $(echo -n ":credpair" | base64)" \
