@@ -34,7 +34,7 @@ jobs:
           echo "credentails pair : $credpair"
 
           #encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credpair))
-          encodedCredentials=$(echo -n "$credpair" | base64)
+          #encodedCredentials=$(echo -n "$credpair" | base64)
           #echo "encodedCredentials : $encodedCredentials"
           #headers= @{'Content-Type' = "application/json-patch+json"
           #              'Accept' = "application/json; api-version=7.0"
@@ -43,13 +43,13 @@ jobs:
                        
           echo " url is : $ADO_URL"
           
-          response=$(curl -s -X PATCH \
-          -H "Authorization: Basic $(echo -n "3wmr4hqqjcbcp2n2zus7ejqgtksahfaisajpquo4uxko2sv7ftqq" )" \
-          -H "Content-Type: application/json-patch+json" \
-          -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
-          ${ADO_URL} )
+          #response=$(curl -s -X PATCH \
+          #-H "Authorization: Basic $(echo -n "3wmr4hqqjcbcp2n2zus7ejqgtksahfaisajpquo4uxko2sv7ftqq" )" \
+          #-H "Content-Type: application/json-patch+json" \
+          #-d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
+          #${ADO_URL} )
 
-          echo "response is ${response}"
+          #echo "response is ${response}"
           
           #$encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
           # Trigger pipeline
@@ -60,3 +60,11 @@ jobs:
           #-H "Content-Type: application/json-patch+json" \
           #-d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
           #${ADO_URL}
+
+          $tokenHeaders = @{
+              "Content-Type" = "application/x-www-form-urlencoded"
+              "Authorization" = "Basic 3wmr4hqqjcbcp2n2zus7ejqgtksahfaisajpquo4uxko2sv7ftqq"
+          }
+          $tokenResponse = Invoke-RestMethod -Uri $ADO_URL -Method Post -Body "grant_type=client_credentials" -Headers $tokenHeaders
+          Write-Output "Token: $($tokenResponse.access_token)"
+          
