@@ -22,9 +22,17 @@ jobs:
           # Set variables
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
           # Trigger the pipeline
+          # JSON data to be sent
+          json_data='{"text": "Code Updated"}'
+          
+          # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
             -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" \
-            -d '{ "text" : "Code Updated"  }')
-          echo " response : $response "
+            -d "$json_data" \
+            -w "%{http_code}" -o response_body.txt -s)
                     
+          # Output HTTP status code and response body
+          echo "HTTP Status Code: ${response}"
+          echo "Response Body:"
+          cat response_body.txt
