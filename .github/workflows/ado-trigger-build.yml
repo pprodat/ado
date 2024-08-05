@@ -15,7 +15,7 @@ jobs:
 
       - name: Trigger Azure DevOps Pipeline
         env:
-          ADO_PAT: ${{ secrets.ADO_PAT }}
+          ADO_PAT: "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"
           ADO_ORG: "UnipharGroup"
           ADO_PROJECT: "DAWN-dev"          
         run: |
