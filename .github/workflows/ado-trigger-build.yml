@@ -28,12 +28,12 @@ jobs:
           echo "pat value : $pat"
           username="${{ secrets.USERNAME }}"
           echo "usernamw is : $username"
-          credPair="${username}:${pat}"
+          credpair="${username}:${pat}"
           echo "credentails pair : $credpair"
 
 
           apiUrl="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
-          encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes${credPair})
+          encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes${credpair})
           headers= @{'Content-Type' = "application/json-patch+json"
                         'Accept' = "application/json; api-version=7.0"
                         'Authorization' = "Basic $encodedCredentials"
