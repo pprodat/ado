@@ -25,10 +25,10 @@ jobs:
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
 
           pat = "${{ secrets.ADO_PAT }}"
-          echo "##vso[task.setvariable variable=mypat;]$pat"
+          echo "pat value : $pat"
           username = "${{ secrets.USERNAME }}"
           credPair = "$($username):$($pat)"
-          echo "##vso[task.setvariable variable=mycredpair;]$credpair"
+          echo "credentails pair : $credpair"
 
 
           apiUrl = "https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
@@ -39,7 +39,7 @@ jobs:
                        }
           response = Invoke-RestMethod $apiUrl -Method GET -Headers $headers
           response1 = $response | ConvertTo-Json
-          echo "##vso[task.setvariable variable=myresponse;]$response"
+          echo "response : $response"
 
           curl -X PATCH \
           -H "Authorization: Basic $(echo -n ":credpair" | base64)" \
