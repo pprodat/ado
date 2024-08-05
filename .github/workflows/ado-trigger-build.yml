@@ -22,7 +22,9 @@ jobs:
           # Set variables
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
           # Trigger the pipeline
-          curl -X POST "$ADO_URL" \
+          response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
             -H "Authorization: Basic $(echo -n ":${ADO_PAT}" | base64)" \
-            -d '{ "text" = "Code Updated"  }'
+            -d '{ "text" = "Code Updated"  }')
+          echo " response : $response "
+                    
