@@ -34,10 +34,11 @@ jobs:
                        
           echo " url is : $ADO_URL"          
 
-          $tokenHeaders=@{
+          tokenHeaders=@{
               "Content-Type" = "application/x-www-form-urlencoded"
               "Authorization" = "Basic $pat"
           }
-          $tokenResponse=Invoke-RestMethod -Uri $ADO_URL -Method Patch -Body "grant_type=client_credentials" -Headers $tokenHeaders
-          Write-Output "Token: $($tokenResponse.access_token)"
-          
+          echo "token : $tokenHeaders"
+          tokenResponse=Invoke-RestMethod -Uri $ADO_URL -Method Patch -Body "grant_type=client_credentials" -Headers $tokenHeaders
+          #Write-Output "Token: $(tokenResponse.access_token)"
+          echo "tokenResponse is $tokenResponse "
