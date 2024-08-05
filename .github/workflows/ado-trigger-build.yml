@@ -17,8 +17,7 @@ jobs:
         env:
           ADO_PAT: ${{ secrets.ADO_PAT }}
           ADO_ORG: "UnipharGroup"
-          ADO_PROJECT: "DAWN-dev"    
-          PAT : "t5bzefefstb35kztqpctmagze6xdlizoifhjiu7vfuy7hioq6hsa"
+          ADO_PROJECT: "DAWN-dev"              
         run: |
           # Set variables
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
