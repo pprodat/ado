@@ -54,12 +54,12 @@ jobs:
 
           echo "response is $response"
           
-          $encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
+          #$encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
           # Trigger pipeline
           # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${credPair}" | base64)" ${ADO_URL}
 
-          curl -X PATCH \
-          -H "Authorization: Basic $(echo -n ":encodedCredentials" | base64)" \
-          -H "Content-Type: application/json-patch+json" \
-          -d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
-          ${ADO_URL}
+          #curl -X PATCH \
+          #-H "Authorization: Basic $(echo -n ":encodedCredentials" | base64)" \
+          #-H "Content-Type: application/json-patch+json" \
+          #-d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
+          #${ADO_URL}
