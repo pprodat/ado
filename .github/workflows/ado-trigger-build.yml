@@ -22,7 +22,8 @@ jobs:
           ADO_ORG="UnipharGroup"
           ADO_PROJECT="DAWN-dev"
           ADO_PIPELINE_ID="your_pipeline_id"
-          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
+          #ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workitems/34424?api-version=6.0"
+          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"
 
           pat="${{ secrets.ADO_PAT }}"
           echo "pat value : $pat"
