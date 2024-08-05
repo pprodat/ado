@@ -30,36 +30,9 @@ jobs:
           echo "pat value : $pat"
           username="${{ secrets.USERNAME }}"
           echo "usernamw is : $username"
-          credpair="${username}:${pat}"
-          echo "credentails pair : $credpair"
-
-          #encodedCredentials=[System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credpair))
-          #encodedCredentials=$(echo -n "$credpair" | base64)
-          #echo "encodedCredentials : $encodedCredentials"
-          #headers= @{'Content-Type' = "application/json-patch+json"
-          #              'Accept' = "application/json; api-version=7.0"
-          #              'Authorization' = "Basic $encodedCredentials"
-          #             }
+          credpair="${username}:${pat}"          
                        
-          echo " url is : $ADO_URL"
-          
-          #response=$(curl -s -X PATCH \
-          #-H "Authorization: Basic $(echo -n "3wmr4hqqjcbcp2n2zus7ejqgtksahfaisajpquo4uxko2sv7ftqq" )" \
-          #-H "Content-Type: application/json-patch+json" \
-          #-d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
-          #${ADO_URL} )
-
-          #echo "response is ${response}"
-          
-          #$encodedCredentials = [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($credPair))          
-          # Trigger pipeline
-          # curl -X POST -H "Content-Type: application/json" -H "Authorization: Basic $(echo -n ":${credPair}" | base64)" ${ADO_URL}
-
-          #curl -X PATCH \
-          #-H "Authorization: Basic $(echo -n ":encodedCredentials" | base64)" \
-          #-H "Content-Type: application/json-patch+json" \
-          #-d '[{"op": "add", "path": "/fields/System.History", "value": "Code Updated."}]' \
-          #${ADO_URL}
+          echo " url is : $ADO_URL"          
 
           $tokenHeaders = @{
               "Content-Type" = "application/x-www-form-urlencoded"
