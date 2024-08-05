@@ -23,7 +23,7 @@ jobs:
           ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
           # Trigger the pipeline
           # JSON data to be sent
-          json_data='{"text": "Code Updated"}'
+          json_data='{"text": "Code Updated hehhe"}'
           
           # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
