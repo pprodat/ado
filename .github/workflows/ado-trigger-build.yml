@@ -30,8 +30,11 @@ jobs:
           echo " secret pat : $encoded_pat1"          
 
           encoded_pat2=$(echo -n ":${encoded_pat}" | base64)
-          echo " encode ka encode : $encoded_pat2"          
+          echo " encode ka encode : $encoded_pat2"
 
+          decoded_value=$(echo "$encoded_pat1" | base64 --decode)
+          echo "decoded secret = $decoded_value"
+          
           # Make the API request and capture the response
           response=$(curl -X POST "$ADO_URL" \
             -H "Content-Type: application/json" \
