@@ -1,0 +1,20 @@
+name: Trigger ADO Build Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trigger-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+          
+      - name: Trigger Azure DevOps Pipeline
+        env:
+          clntid: ${{ secrets.CLNTID }}
+          clntsec: ${{ secrets.CLNTSEC }}
+          resrc: ${{ secrets.RESRC }}
+          ADO_ORG: "UnipharGroup"
+          ADO_PROJECT: "DAWN-dev"   
