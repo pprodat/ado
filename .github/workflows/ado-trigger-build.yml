@@ -1,9 +1,12 @@
 name: Trigger ADO Build Pipeline
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      workitemid:
+        description: 'ID of the work item'
+        required: true
+        type: string      
 
 jobs:
   trigger-pipeline:
@@ -12,7 +15,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
+          
       - name: Trigger Azure DevOps Pipeline
         env:
           ADO_PAT: ${{ secrets.ADO_PAT }}
@@ -20,7 +23,7 @@ jobs:
           ADO_PROJECT: "DAWN-dev"              
         run: |
           # Set variables
-          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/34424/comments?api-version=7.1-preview.3"          
+          ADO_URL="https://dev.azure.com/${ADO_ORG}/${ADO_PROJECT}/_apis/wit/workItems/${{ github.event.inputs.workitemid }}/comments?api-version=7.1-preview.3"          
           # Trigger the pipeline
           # JSON data to be sent
           json_data='{"text": "Code Updated hehhe1"}'
