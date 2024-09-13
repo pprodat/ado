@@ -19,4 +19,5 @@ jobs:
           ADO_ORG: "UnipharGroup"
           ADO_PROJECT: "DAWN-dev"   
         run: |   
-          echo "PASS"
+          echo "PASS" >> "$GITHUB_OUTPUT"
+          echo "$clntid" >> "$GITHUB_OUTPUT"
