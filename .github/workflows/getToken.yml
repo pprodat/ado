@@ -18,3 +18,5 @@ jobs:
           resrc: ${{ secrets.RESRC }}
           ADO_ORG: "UnipharGroup"
           ADO_PROJECT: "DAWN-dev"   
+        run: |   
+          write-output: $clntid
