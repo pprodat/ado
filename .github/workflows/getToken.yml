@@ -19,4 +19,4 @@ jobs:
           ADO_ORG: "UnipharGroup"
           ADO_PROJECT: "DAWN-dev"   
         run: |   
-          write-output: $clntid
+          echo "PASS"
